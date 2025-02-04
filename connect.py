@@ -84,11 +84,15 @@ def open_new_window():
         global min_value_ecg, max_value_ecg, mean_value_ecg
         file_path = r'C:\Users\Hp\Desktop\Нейро\info_csv.csv'
         fio = name_entry.get()
+        name_entry.delete(0, END)
         age = age_entry.get()
+        age_entry.delete(0, END)
         with open(file_path, 'a') as file:
             current_datetime = datetime.now()
-            formatted_date = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
-            file.write(f'{fio},{age},{formatted_date},{min_value_emg},{max_value_emg},{mean_value_emg},{min_value_ecg},{max_value_ecg},{mean_value_ecg},\n')
+            formatted_date = current_datetime.strftime('%Y-%m-%d')
+            hour_data = current_datetime.strftime('%H:%M:%S')
+            file.write(f'{fio},{age},{formatted_date},{hour_data},{min_value_emg},{mean_value_emg},{max_value_emg},'
+                       f'{min_value_ecg},{mean_value_ecg},{max_value_ecg}\n')
 
     save_button = Button(fio_input_fr, text='Записать', command=create_csv)
     save_button.grid(row=2, column=1, sticky='nsew')

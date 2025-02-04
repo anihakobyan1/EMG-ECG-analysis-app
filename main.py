@@ -8,11 +8,24 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 from connect import open_new_window
+from tkinter import messagebox
 
-# Set up the main Tkinter window
+
 root = Tk()
 root.geometry('1100x1000')
+root.title('Главное окно')
 
+def check_connection():
+    # Здесь должна быть ваша логика проверки подключения
+    # Для примера, просто имитируем успешное подключение
+    connection_successful = True  # Замените на вашу логику
+
+    if connection_successful:
+        # Если подключение успешно, скрываем текущее окно и открываем новое
+        root.withdraw()  # Скрываем текущее окно
+        open_new_window()
+    else:
+        messagebox.showerror("Ошибка", "Не удалось подключиться.")
 def get_active_ports():
     active_ports = []
     ports = serial.tools.list_ports.comports()
@@ -69,7 +82,7 @@ ekg_label1 = Label(ekg_frame, text='Выполнить подключение э
 ekg_label1.pack()
 ekg_label2 = Label(ekg_frame, text='Пульс не определен проверьте подключение', font=('Helvetica', 14))
 ekg_label2.pack()
-test_button = Button(ekg_frame, text='Новое окно', command=open_new_window)
+test_button = Button(ekg_frame, text='Новое окно', command=check_connection)
 test_button.pack()
 
 # EMG Frame
