@@ -1,0 +1,15 @@
+void setup() {
+  // put your setup code here, to run once:
+    Serial.begin(9600);
+}
+
+void loop() {
+  int val1 = analogRead(A0);
+  int val2 = analogRead(A1);
+
+  char save[16];
+  sprintf(save, "%d_%d", val1, val2);
+  Serial.println(save);
+  // put your main code here, to run repeatedly:
+  delay(10);
+}
